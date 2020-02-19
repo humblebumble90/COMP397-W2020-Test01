@@ -17,15 +17,87 @@ void Level1Scene::draw()
 	m_psecondNumLabel->draw();
 	
 	m_pRollButton->draw();
+
+	switch(firstNum)
+	{
+	case 1:
+		m_pDice1 = new Dice1();
+		m_pDice1->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice1->draw();		
+			break;
+		case 2:
+			m_pDice2 = new Dice2();
+			m_pDice2->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+			m_pDice2->draw();
+			break;
+		case 3:
+			m_pDice3 = new Dice3();
+			m_pDice3->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+			m_pDice3->draw();
+			break;
+		case 4:
+			m_pDice4 = new Dice4();
+			m_pDice4->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+			m_pDice4->draw();
+			break;
+		case 5:
+			m_pDice5 = new Dice5();
+			m_pDice5->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+			m_pDice5->draw();
+			break;
+		case 6:
+			m_pDice6 = new Dice6();
+			m_pDice6->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+			m_pDice6->draw();
+			break;
+	}
+	switch (secondNum)
+	{
+	case 1:
+		m_pDice1 = new Dice1();
+		m_pDice1->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice1->draw();
+		break;
+	case 2:
+		m_pDice2 = new Dice2();
+		m_pDice2->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice2->draw();
+		break;
+	case 3:
+		m_pDice3 = new Dice3();
+		m_pDice3->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice3->draw();
+		break;
+	case 4:
+		m_pDice4 = new Dice4();
+		m_pDice4->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice4->draw();
+		break;
+	case 5:
+		m_pDice5 = new Dice5();
+		m_pDice5->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice5->draw();
+		break;
+	case 6:
+		m_pDice6 = new Dice6();
+		m_pDice6->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+		m_pDice6->draw();
+		break;
+	}
 	
-	m_pDice1->draw();
-	m_pDice2->draw();
 }
 
 void Level1Scene::update()
 {
-
-
+	m_pRollButton->setMousePosition(m_mousePosition);
+	if( m_pRollButton->ButtonClick())
+	{
+		std::cout << "Cicked!\n";
+		roll();
+		m_pRollButton->setMouseButtonClicked(false);
+	}
+	m_pfirstNumLabel->setText(std::to_string(firstNum));
+	m_psecondNumLabel->setText(std::to_string(secondNum));
 }
 
 void Level1Scene::clean()
@@ -53,7 +125,7 @@ void Level1Scene::handleEvents()
 			switch(event.button.button)
 			{
 			case SDL_BUTTON_LEFT:
-				
+				m_pRollButton->setMouseButtonClicked(true);
 				break;
 			}
 		
@@ -62,7 +134,7 @@ void Level1Scene::handleEvents()
 			switch (event.button.button)
 			{
 			case SDL_BUTTON_LEFT:
-				
+				m_pRollButton->setMouseButtonClicked(false);
 				break;
 			}
 			break;
@@ -96,6 +168,10 @@ void Level1Scene::handleEvents()
 			case SDLK_d:
 
 				break;
+
+			case SDLK_SPACE:
+					roll();
+					break;
 			}
 			
 			break;
@@ -145,18 +221,28 @@ void Level1Scene::start()
 
 	
 
-	m_pDice1 = new Dice1();
-	m_pDice1->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
-	m_pDice1->setParent(this);
-	addChild(m_pDice1);
-	m_pDice2 = new Dice2();
-	m_pDice2->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
-	m_pDice2->setParent(this);
-	addChild(m_pDice2);
+	//m_pDice1 = new Dice1();
+	//m_pDice1->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
+	//m_pDice1->setParent(this);
+	//addChild(m_pDice1);
+	//m_pDice2 = new Dice2();
+	//m_pDice2->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
+	//m_pDice2->setParent(this);
+	//addChild(m_pDice2);
 
 	
 	
 }
+
+void Level1Scene::roll()
+{
+	std::cout << "Do something\n";
+	firstNum = rand() % 6 + 1;
+	secondNum = rand() % 6 + 1;
+	std::cout << firstNum << std::endl;
+	std::cout << secondNum << std::endl;
+}
+
 
 glm::vec2 Level1Scene::getMousePosition()
 {
