@@ -19,6 +19,7 @@ Level1Scene::~Level1Scene()
 
 void Level1Scene::draw()
 {
+	m_istruct->draw();
 	m_pfirstNumLabel->draw();
 	m_psecondNumLabel->draw();
 	
@@ -163,6 +164,9 @@ void Level1Scene::handleEvents()
 			case SDLK_2:
 				TheGame::Instance()->changeSceneState(SceneState::END_SCENE);
 				break;
+			case SDLK_3:
+				TheGame::Instance()->changeSceneState(SceneState::LEVEL2_SCENE);
+				break;
 			
 
 				/************************************************************************/
@@ -214,7 +218,10 @@ void Level1Scene::handleEvents()
 void Level1Scene::start()
 {
 	SDL_Color black = { 0,0,0,255 };
-	
+	m_istruct = new Label("push 3 for bonus stage", "lazy", 25,
+		black, glm::vec2(Config::SCREEN_WIDTH * 0.5f, Config::SCREEN_HEIGHT * 0.25f));
+	m_istruct->setParent(this);
+	addChild(m_istruct);
 	m_pfirstNumLabel = new Label("", "lazy", 25,
 		black, glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.55f));
 	m_pfirstNumLabel->setParent(this);

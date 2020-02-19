@@ -3,6 +3,7 @@
 #include "GLM/gtx/string_cast.hpp"
 #include <algorithm>
 #include <iomanip>
+#include "Level2Scene.h"
 
 
 Game* Game::s_pInstance = 0;
@@ -155,6 +156,10 @@ void Game::changeSceneState(SceneState newState)
 			m_currentScene = new Level1Scene();
 			std::cout << "play scene activated" << std::endl;
 			break;
+		case SceneState::LEVEL2_SCENE:
+			m_currentScene = new Level2Scene();
+			std::cout << "play scene2 activated" << std::endl;
+				break;
 		case SceneState::END_SCENE:
 			m_currentScene = new EndScene();
 			std::cout << "end scene activated" << std::endl;

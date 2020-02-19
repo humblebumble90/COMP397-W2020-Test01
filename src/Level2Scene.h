@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __LEVEL_1_SCENE__
-#define __LEVEL_1_SCENE__
+#ifndef __LEVEL_2_SCENE__
+#define __LEVEL_2_SCENE__
 
 #include "Scene.h"
 #include "RollButton.h"
@@ -12,12 +12,12 @@
 #include "Dice6.h"
 #include "Label.h"
 
-class Level1Scene : public Scene
+class Level2Scene : public Scene
 {
 public:
-	Level1Scene();
-	~Level1Scene();
-	
+	Level2Scene();
+	~Level2Scene();
+
 	void draw() override;
 	void update() override;
 	void clean() override;
@@ -32,7 +32,7 @@ public:
 private:
 	// game objects
 	RollButton* m_pRollButton;
-	
+
 	Dice1* m_pDice1;
 	Dice2* m_pDice2;
 	Dice3* m_pDice3;
@@ -40,17 +40,24 @@ private:
 	Dice5* m_pDice5;
 	Dice6* m_pDice6;
 
-	Label* m_istruct;
+
 	Label* m_pfirstNumLabel;
 	Label* m_psecondNumLabel;
+	Label* m_pthirdNumLabel;
+	Label* m_pforthNumLabel;
+	Label* m_pResultLabel;
 
 
 	// private data member
 	glm::vec2 m_mousePosition;
 	int firstNum = 0;
 	int secondNum = 0;
-	
-	
+	int thirdNum = 0;
+	int forthNum = 0;
+	int result = 0;
+	int min = 0;
+
+
 };
 
-#endif /* defined (__LEVEL_1_SCENE__) */
+#endif /* defined (__LEVEL_2_SCENE__) */
