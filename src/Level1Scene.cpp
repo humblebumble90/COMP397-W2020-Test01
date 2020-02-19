@@ -1,7 +1,13 @@
 #include "Level1Scene.h"
 #include "Game.h"
 #include <iostream>
-
+/*
+ * Author: 'Phillip' Hyungseok lee.
+ * Reference: Provided several templates from the professor Tom Tsiliopoulos's 2020 Winter COMP397 course.
+ * StudentNumber: 301011097
+ * Written date : 02-20-2020
+ * Description: The dice game's level1 scene.
+ */
 Level1Scene::Level1Scene()
 {
 	start();
@@ -94,10 +100,14 @@ void Level1Scene::update()
 	{
 		std::cout << "Cicked!\n";
 		roll();
-		m_pRollButton->setMouseButtonClicked(false);
+		m_pRollButton->setMouseButtonClicked(false); /*
+		The boolean has to be restricted after implemented once. Otherwise, the if statement infinitely works while button is pushed*/
 	}
-	m_pfirstNumLabel->setText(std::to_string(firstNum));
-	m_psecondNumLabel->setText(std::to_string(secondNum));
+	if(firstNum > 0 && secondNum > 0)
+	{
+		m_pfirstNumLabel->setText(std::to_string(firstNum));
+		m_psecondNumLabel->setText(std::to_string(secondNum));
+	}
 }
 
 void Level1Scene::clean()
@@ -205,11 +215,11 @@ void Level1Scene::start()
 {
 	SDL_Color black = { 0,0,0,255 };
 	
-	m_pfirstNumLabel = new Label(std::to_string(firstNum), "Dock51", 25,
+	m_pfirstNumLabel = new Label("", "lazy", 25,
 		black, glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.55f));
 	m_pfirstNumLabel->setParent(this);
 	addChild(m_pfirstNumLabel);
-	m_psecondNumLabel = new Label(std::to_string(secondNum), "Dock51", 25,
+	m_psecondNumLabel = new Label("", "lazy", 25,
 		black, glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.55f));
 	m_psecondNumLabel->setParent(this);
 	addChild(m_psecondNumLabel);
@@ -217,30 +227,15 @@ void Level1Scene::start()
 	m_pRollButton = new RollButton();
 	m_pRollButton->setPosition(glm::vec2(Config::SCREEN_WIDTH*0.5f, Config::SCREEN_HEIGHT * 0.75f));
 	m_pRollButton->setParent(this);
-	addChild(m_pRollButton);
-
-	
-
-	//m_pDice1 = new Dice1();
-	//m_pDice1->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.25f, Config::SCREEN_HEIGHT * 0.25f));
-	//m_pDice1->setParent(this);
-	//addChild(m_pDice1);
-	//m_pDice2 = new Dice2();
-	//m_pDice2->setPosition(glm::vec2(Config::SCREEN_WIDTH * 0.75f, Config::SCREEN_HEIGHT * 0.25f));
-	//m_pDice2->setParent(this);
-	//addChild(m_pDice2);
-
-	
-	
+	addChild(m_pRollButton);	
 }
 
-void Level1Scene::roll()
+void Level1Scene::roll() // Roll the dice to make random number 1 to 6
 {
-	std::cout << "Do something\n";
 	firstNum = rand() % 6 + 1;
 	secondNum = rand() % 6 + 1;
-	std::cout << firstNum << std::endl;
-	std::cout << secondNum << std::endl;
+	std::cout << "FirstNum: " + std::to_string(firstNum) << std::endl;
+	std::cout << "SecondNum: " + std::to_string(secondNum) << std::endl;
 }
 
 
